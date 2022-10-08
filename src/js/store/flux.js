@@ -1,6 +1,7 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
+			people: [],
 			demo: [
 				{
 					title: "FIRST",
@@ -37,7 +38,27 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 				//reset the global store
 				setStore({ demo: demo });
-			}
+			},
+			getPeople : async () => {
+				try{
+					const response = await fetch(
+						"https://www.swapi.tech/api/people/"
+					)
+					const peopleBody  = await response.json()
+					console.log(peopleBody)
+					const store = getStore (
+
+					)
+					setStore (
+						{people:peopleBody.results}
+					)
+				}
+				catch(error){
+					console.log(error)
+				}
+			},
+				
+
 		}
 	};
 };
